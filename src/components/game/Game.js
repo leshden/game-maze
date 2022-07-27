@@ -1,11 +1,16 @@
 import Header from '../header/Header';
 import Board from '../board/Board';
+import Steps from '../steps/Steps';
+import './Game.css';
 
 const Game = () => {
   return (
     <>
       <Header />
-      <Board />
+      <main className = 'main-container'>
+        <Board />
+        <Steps />
+      </main>
     </>
   )
 }

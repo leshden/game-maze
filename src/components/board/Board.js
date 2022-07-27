@@ -1,5 +1,5 @@
-import './Board.css';
 import Cell from '../cell/Cell';
+import './Board.css';
 
 const Board = () => {
 
@@ -7,13 +7,13 @@ const Board = () => {
   const cells = Array(columns * columns).fill(0);
 
   return (
-    <div className='board-container'>
+    <section className='board-container'>
       <div role='grid' className='board' style={{ 'gridTemplateColumns': `repeat(${columns}, 1fr)` }}>
         {
-          cells.map((item, index) => <Cell key={index}/>)
+          cells.map((item, index) => <Cell key={index} index={index} />)
         }
       </div>
-    </div>
+    </section>
   )
 }
 
