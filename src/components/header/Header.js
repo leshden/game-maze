@@ -3,7 +3,7 @@ import './Header.css';
 const Header = () => {
   return (
     <header>
-      Лабиринт
+      <h2>ЛАБИРИНТ</h2>
     </header>
   )
 }
