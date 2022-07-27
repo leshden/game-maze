@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import {startGame, isStart} from '../../features/game-state/gameStateSlice';
+import {startGame, isStart, nextStepAsync} from '../../features/game-state/gameStateSlice';
 import './Cell.css';
 
 const Cell = ({index}) => {
@@ -13,7 +13,7 @@ const Cell = ({index}) => {
       return;
     }
 
-    dispatch(startGame());
+    dispatch(nextStepAsync(index));
 
     console.log(`click cell : ${index}`);
     console.log(`Start Game! - ${start}`);
