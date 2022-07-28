@@ -1,20 +1,26 @@
 import Step from '../step/Step';
 import { useSelector, useDispatch } from 'react-redux';
 import {useEffect} from 'react';
-import {gameSteps, gameStatus, nextRandomStep, endGame, isLastStep} from '../../features/game-state/gameStateSlice';
+import {gameSteps,
+        gameStatus,
+        nextRandomStep,
+        endGame,
+        isProcessing,
+        isLastStep} from '../../features/game-state/gameStateSlice';
 import './Steps.css';
 
 const Steps = () => {
 
   const isStepOver = useSelector(isLastStep);
   const steps = useSelector(gameSteps);
-  const length = steps.length;
+  const processing = useSelector(isProcessing);
   const status = useSelector(gameStatus);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
 
-    if (status === 'idle' || status == 'ending') {
+    if (!processing) {
       return;
     }
 
@@ -23,11 +29,9 @@ const Steps = () => {
       return;
     }
 
-    console.log('gfdgdfg');
-
     const interval = setInterval(() => {
       dispatch(nextRandomStep());
-    }, 2000);
+    }, 1000);
 
     return () => clearInterval(interval);
 }, [status, steps]);
