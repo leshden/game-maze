@@ -1,22 +1,27 @@
 import { useSelector, useDispatch } from 'react-redux';
-import {startGame, isStart, nextStepAsync} from '../../features/game-state/gameStateSlice';
+import {startGame, isProcessing, isEnding, gameIndex} from '../../features/game-state/gameStateSlice';
 import './Cell.css';
 
 const Cell = ({index}) => {
-  const start = useSelector(isStart);
+  const processing = useSelector(isProcessing);
+  const ending = useSelector(isEnding);
+  const startIndex = useSelector(gameIndex);
   const dispatch = useDispatch();
-  const bgColor = start ? 'RoyalBlue' : 'Thistle'
+  const bgColor = startIndex === index ? 'RoyalBlue' : 'Thistle'
 
   const handleClick = () => {
-    if(start) {
+    if (ending) {
+      console.log('End game!');
+    }
+
+    if(processing) {
       console.log('Game Started!');
       return;
     }
 
-    dispatch(nextStepAsync(index));
+    dispatch(startGame(index));
 
     console.log(`click cell : ${index}`);
-    console.log(`Start Game! - ${start}`);
   }
 
   return (
