@@ -1,8 +1,9 @@
 import './Step.css';
 
-const Step = () => {
+const Step = ({code}) => {
   return (
     <div className='step-container'>
+      {code}
     </div>
   )
 }

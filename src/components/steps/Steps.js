@@ -1,11 +1,12 @@
 import Step from '../step/Step';
 import { useSelector, useDispatch } from 'react-redux';
 import {useEffect} from 'react';
-import {gameSteps, gameStatus, nextRandomStep, endGame} from '../../features/game-state/gameStateSlice';
+import {gameSteps, gameStatus, nextRandomStep, endGame, isLastStep} from '../../features/game-state/gameStateSlice';
 import './Steps.css';
 
 const Steps = () => {
 
+  const isStepOver = useSelector(isLastStep);
   const steps = useSelector(gameSteps);
   const length = steps.length;
   const status = useSelector(gameStatus);
@@ -17,9 +18,7 @@ const Steps = () => {
       return;
     }
 
-    const length = steps.length;
-
-    if (length > 5) {
+    if (isStepOver) {
       dispatch(endGame());
       return;
     }
@@ -39,7 +38,10 @@ const Steps = () => {
       <h5 className='steps-title'>ШАГИ</h5>
       <div className='steps-container-inner'>
         {
-          steps.map((step, index) => <Step key={index}/>)
+          steps.map((step, index) => {
+            const {code} = step;
+            return <Step key={index} code={code}/>
+          })
         }
       </div>
     </section>

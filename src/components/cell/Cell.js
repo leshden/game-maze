@@ -1,13 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
-import {startGame, isProcessing, isEnding, gameIndex} from '../../features/game-state/gameStateSlice';
+import {startGame, isProcessing, isEnding, gameStartIndex} from '../../features/game-state/gameStateSlice';
 import './Cell.css';
 
 const Cell = ({index}) => {
   const processing = useSelector(isProcessing);
   const ending = useSelector(isEnding);
-  const startIndex = useSelector(gameIndex);
+  const startIndex = useSelector(gameStartIndex);
   const dispatch = useDispatch();
   const bgColor = startIndex === index ? 'RoyalBlue' : 'Thistle'
+  const textCell = startIndex === index ? 'Старт' : ''
 
   const handleClick = () => {
     if (ending) {
@@ -26,7 +27,7 @@ const Cell = ({index}) => {
 
   return (
     <div role='gridcell' className='cell' onClick={handleClick} style={{ 'backgroundColor': `${bgColor}` }}>
-      Cell!
+      {textCell}
     </div>
   )
 }
